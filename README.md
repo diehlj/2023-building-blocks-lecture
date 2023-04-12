@@ -54,3 +54,4 @@ GPU in tensorflow. The following steps should fix this. (see
     >>> printf 'export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/\n' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
     >>> mkdir -p $CONDA_PREFIX/lib/nvvm/libdevice
     >>> cp $CONDA_PREFIX/lib/libdevice.10.bc $CONDA_PREFIX/lib/nvvm/libdevice/
+    >>> source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh

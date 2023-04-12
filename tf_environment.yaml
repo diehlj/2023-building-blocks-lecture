@@ -6,7 +6,7 @@ dependencies:
   - python=3.10
   - pip
   - cudatoolkit=11.8.0
-  - cuda-nvcc=11.3.58+
+  - cuda-nvcc=11.3.58
 
   - pip:
     - nvidia-cudnn-cu11==8.6.0.163
