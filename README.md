@@ -16,6 +16,25 @@ machine on AppHub **with a GPU**.
 Open a terminal (ctrl+shift+ö, or `Terminal -> New Terminal` in the upper left of the AppHub
 interface) and execute the following commands one after another.
 
+---
+### ! Shortcut !
+
+Instead of following the steps listed below each one after another, you can use the file
+[conda_setup.sh](./conda_setup.sh) which executes them all in the same order. First, make sure it
+is executable using
+
+    >>> chmod +x conda_setup.sh
+
+and then run it.
+
+    >>> ./conda_setup.sh
+
+
+This might take a few seconds as it installs every Python package we need. You find a description
+of what the batch script just did below. There is no need to run the commands.
+
+---
+
 #### 1 Install Python Packages
 
 This command creates a new conda environment (named `tf_py310`) and installs all required packages
