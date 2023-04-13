@@ -16,3 +16,4 @@ dependencies:
     - scipy
     - prettytable
     - seaborn
+    - plotly
