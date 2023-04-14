@@ -33,6 +33,20 @@ and then run it.
 This might take a few seconds as it installs every Python package we need. You find a description
 of what the batch script just did below. There is no need to run the commands.
 
+#### On a Mac with Apple Silicon
+
+There is a variant of that script for Mac computers with [Apple silicon](https://support.apple.com/en-us/HT211814).
+
+First, make sure it is executable using
+
+    $ chmod +x conda_setup_macos_m2.sh
+
+and then run it.
+
+    $ ./conda_setup_macos_m2.sh
+
+Apple's M1 and M2 chips bring their own GPU, so there is no need to deal with Cuda and NVidia settings.
+
 ---
 
 #### 1 Install Python Packages
