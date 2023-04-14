@@ -23,11 +23,11 @@ Instead of following the steps listed below each one after another, you can use 
 [conda_setup.sh](./conda_setup.sh) which executes them all in the same order. First, make sure it
 is executable using
 
-    >>> chmod +x conda_setup.sh
+    $ chmod +x conda_setup.sh
 
 and then run it.
 
-    >>> ./conda_setup.sh
+    $ ./conda_setup.sh
 
 
 This might take a few seconds as it installs every Python package we need. You find a description
@@ -40,26 +40,26 @@ of what the batch script just did below. There is no need to run the commands.
 This command creates a new conda environment (named `tf_py310`) and installs all required packages
 in it. We use the file [tf_environment.yaml](tf_environment.yaml).
 
-    >>> conda env create -f tf_environment.yaml
+    $ conda env create -f tf_environment.yaml
 
 Activate the environment for all following steps.
 
-    >>> conda activate tf_py310
+    $ conda activate tf_py310
 
 #### 2 Setting up Cuda
 
 We follow the steps listed [here](https://www.tensorflow.org/install/pip#linux).
 
-    >>> mkdir -p $CONDA_PREFIX/etc/conda/activate.d
-    >>> echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-    >>> echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-    >>> source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+    $ mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+    $ echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+    $ echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/:$CUDNN_PATH/lib' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+    $ source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 
 #### 3 Test the Installation
 
 You can test the tensorflow installation by executing:
 
-    >>> python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
+    $ python3 -c "import tensorflow as tf; print(tf.config.list_physical_devices('GPU'))"
 
 If Python (after some initialization information) prints out a none-empty list, tensorflow is set
 up correctly.
@@ -70,7 +70,7 @@ It seems like there is a common error that may occur when we later actually want
 GPU in tensorflow. The following steps should fix this. (see
 [this thread](https://stackoverflow.com/questions/68614547/tensorflow-libdevice-not-found-why-is-it-not-found-in-the-searched-path))
 
-    >>> printf 'export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/\n' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
-    >>> mkdir -p $CONDA_PREFIX/lib/nvvm/libdevice
-    >>> cp $CONDA_PREFIX/lib/libdevice.10.bc $CONDA_PREFIX/lib/nvvm/libdevice/
-    >>> source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+    $ printf 'export XLA_FLAGS=--xla_gpu_cuda_data_dir=$CONDA_PREFIX/lib/\n' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+    $ mkdir -p $CONDA_PREFIX/lib/nvvm/libdevice
+    $ cp $CONDA_PREFIX/lib/libdevice.10.bc $CONDA_PREFIX/lib/nvvm/libdevice/
+    $ source $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
