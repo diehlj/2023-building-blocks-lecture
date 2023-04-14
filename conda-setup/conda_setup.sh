@@ -1,7 +1,7 @@
 #!/bin/bash
 
 conda env create -f tf_environment.yaml
-source /opt/conda/bin/activate tf_py310
+source $CONDA_PREFIX/bin/activate tf_py310
 
 mkdir -p $CONDA_PREFIX/etc/conda/activate.d
 echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
