@@ -1,0 +1,18 @@
+name: tf_py310
+channels:
+  - conda-forge
+  - nvidia
+  - apple
+dependencies:
+  - python=3.10
+  - pip
+  - apple::tensorflow-deps
+  - pip:
+    - tensorflow-macos
+    - tensorflow-metal
+    - keras-tuner
+    - matplotlib
+    - scipy
+    - prettytable
+    - seaborn
+    - plotly
