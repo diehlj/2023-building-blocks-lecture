@@ -1,6 +1,6 @@
 # Building Blocks of Modern Machine Learning: (Self-)Attention and Diffusion Models
 
-Lecture '23, Joscha Diehl, University of Greifswald
+Lecture '23, [Joscha Diehl](https://diehlj.github.io/), University of Greifswald
 
 [Instructions for setting up your conda environment](conda-setup)
 
