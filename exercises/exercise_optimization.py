@@ -98,6 +98,30 @@ def gradient_descent_exercise():
 
 
 
+def batch_normalization_exercise():
+    # Step 1: Set the random seed for TensorFlow.
+    TODO
+
+    # Step 2: Generate random input data of shape (3,2).
+    data = TODO
+
+    # Step 3: Initialize a LayerNormalization object.
+    bn = tf.keras.layers.BatchNormalization()
+
+    # Step 4: Calculate the mean and variance of the input data.
+    m  = TODO
+    v  = TODO
+
+    # Step 5: Perform batch normalization on the input data.
+    norm    = bn(data, training=True)
+    my_norm = TODO
+
+    # Step 6: Use TensorFlow's debugging tools to assert that the batch normalization is performed correctly.
+    tf.debugging.assert_near(norm, my_norm, atol=1e-3)
+
+    # Step 7: do the same for input data of shape (3,2,4).
+    TODO
+
 def layer_normalization_exercise():
     # Step 1: Set the random seed for TensorFlow.
     TODO
@@ -122,9 +146,27 @@ def layer_normalization_exercise():
     # Step 7: do the same for input data of shape (2,3,4).
     TODO
 
+# https://www.youtube.com/watch?v=x7psGHgatGM
 def parametrization_matters_exercise():
-    # random matrix:
+    # Best trial:
+    # Value: 1.6817373037338257
+    # Params: 
+    # learning_rate = 0.0010743796665726917
+    learning_rate = 0.01
+    batch_size = 4
+    # optimizer_MANUAL: SGD
+    import numpy as np
     n = 10
+    U, _ = np.linalg.qr(np.random.randn(n, n))
+    V, _ = np.linalg.qr(np.random.randn(n, n))
+    min_sv = 1e-6
+    max_sv = 1e6
+    singular_values = np.logspace(np.log10(min_sv), np.log10(max_sv), num=n)
+    Σ = np.diag(singular_values)
+    A = U @ Σ @ V.T
+    print(A.shape)
+    print(np.linalg.cond(A))
+
     A = tf.random.normal( (n,n) )
     def f(_x):
         return tf.einsum('ij,bj->bi', A, _x)
@@ -138,8 +180,25 @@ def parametrization_matters_exercise():
     #   A_1 \in \R^{m \times n}, b_1 \in \R^m, A_2 \in \R^{n \times m}, b_2 \in \R^n; for some m < n
     # 
     # Train each model and compare the results (convergence, generalization, etc.).
+    model = tf.keras.Sequential()
+    model.add(tf.keras.layers.Dense(n, activation="linear", input_shape=(n,)))
+    # model.add(tf.keras.layers.Dense(n, activation="linear", input_shape=(n,)))
+    # optimizer = tf.keras.optimizers.SGD(learning_rate=learning_rate)
+    optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+    mse = tf.keras.losses.MeanSquaredError(name='MSE')
+    mae = tf.keras.losses.MeanAbsoluteError(name='MAE')
+    model.compile(optimizer=optimizer, loss=mse, metrics=[mse, mae])
+    epochs     = 50
+    hist = model.fit(x_train, y_train,
+                    epochs=epochs, batch_size=batch_size,
+                    verbose=1)
+    # ev = model.evaluate(x_test, y_test, batch_size=batch_size)
+    loss = hist.history['MSE'][-1]
+    print( loss )
 
 if __name__ == '__main__':
     # gradient_descent_exercise()
     # regression_exercise()
-    parametrization_matters_exercise()
+    # parametrization_matters_exercise()
+    # parametrization_matters_2()
+    batch_normalization_exercise()
