@@ -122,6 +122,9 @@ def batch_normalization_exercise():
     # Step 7: do the same for input data of shape (3,2,4).
     TODO
 
+    # Step 8: does BatchNormalization have trainable parameters?
+    #         What do they do?
+
 def layer_normalization_exercise():
     # Step 1: Set the random seed for TensorFlow.
     TODO
@@ -201,4 +204,5 @@ if __name__ == '__main__':
     # regression_exercise()
     # parametrization_matters_exercise()
     # parametrization_matters_2()
-    batch_normalization_exercise()
+    # batch_normalization_exercise()
+    # layer_normalization_torch()
